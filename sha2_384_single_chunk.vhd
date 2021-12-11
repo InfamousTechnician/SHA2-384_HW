@@ -44,10 +44,10 @@ ARCHITECTURE Behavioral of sha2_384_single_chunk is
 	type initT is array (0 to 7) of STD_LOGIC_VECTOR(63 downto 0);
 	--constant init : initT := ( -- 512 bit output hash
 	--	x"6a09e667f3bcc908", x"bb67ae8584caa73b", x"3c6ef372fe94f82b", x"a54ff53a5f1d36f1", 
-    --    x"510e527fade682d1", x"9b05688c2b3e6c1f", x"1f83d9abfb41bd6b", x"5be0cd19137e2179");
+        --      x"510e527fade682d1", x"9b05688c2b3e6c1f", x"1f83d9abfb41bd6b", x"5be0cd19137e2179");
 	constant init : initT := ( -- 384 bit output hash
 		x"cbbb9d5dc1059ed8", x"629a292a367cd507", x"9159015a3070dd17", x"152fecd8f70e5939", 
-        x"67332667ffc00b31", x"8eb44a8768581511", x"db0c2e0d64f98fa7", x"47b5481dbefa4fa4");
+                x"67332667ffc00b31", x"8eb44a8768581511", x"db0c2e0d64f98fa7", x"47b5481dbefa4fa4");
 	type kT is array (0 to 84) of STD_LOGIC_VECTOR(63 downto 0);
 	constant k : kT := (
 		x"428a2f98d728ae22", x"7137449123ef65cd", x"b5c0fbcfec4d3b2f", x"e9b5dba58189dbbc", x"3956c25bf348b538", 
@@ -74,8 +74,8 @@ ARCHITECTURE Behavioral of sha2_384_single_chunk is
 	signal wCNT, chunkCNT : STD_LOGIC_VECTOR(6 downto 0);
 	signal intEnable : STD_LOGIC;
 	signal da, db, dc, dd, de, df
-	-- ,dg, dh --512 bits...
-	 : STD_LOGIC_VECTOR(63 downto 0);
+	-- ,dg, dh --for 512 bits
+	    : STD_LOGIC_VECTOR(63 downto 0);
 
 BEGIN
 
@@ -169,6 +169,7 @@ BEGIN
 				dd <= d + init(3);
 				de <= e + init(4);
 				df <= f + init(5);
+                                --512
 				--dg <= g + init(6);
 				--dh <= h + init(7);
 			end if;
@@ -176,6 +177,6 @@ BEGIN
 	end process;
 	
 	digest <= da & db & dc & dd & de & df; --384
-    --digest <= da & db & dc & dd & de & df & dg & dh; --512
+      --digest <= da & db & dc & dd & de & df & dg & dh; --512
 
 end Behavioral;
