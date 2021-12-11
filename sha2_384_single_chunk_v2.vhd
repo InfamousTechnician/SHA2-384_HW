@@ -154,7 +154,7 @@ BEGIN
 	--main_loop_pipe asynchron circuitry
 	su0 <= (a(27 downto 0) & a(63 downto 28)) xor (a(33 downto 0) & a(63 downto 34)) xor (a(38 downto 0) & a(63 downto 39));
 	su1 <= (e(13 downto 0) & e(63 downto 14)) xor (e(17 downto 0) & e(63 downto 18)) xor (e(40 downto 0) & e(63 downto 41));
-    ch <= (e and f) xor ((not e) and g);
+        ch <= (e and f) xor ((not e) and g);
 	temp1 <= h + su1 + ch + k_reg + w_reg;
 	maj <= (a and (b xor c)) xor (b and c);
 	temp2 <= temp1 + su0 + maj;
